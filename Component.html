@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴포넌트 가이드</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>컴포넌트 소개</h1>
+        <p class="subtitle">다양한 UI 컴포넌트를 살펴보세요</p>
+    </header>
+
+    <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">전체</button>
+        <button class="filter-btn" data-filter="1depth">1Depth</button>
+        <button class="filter-btn" data-filter="2depth">2Depth</button>
+    </div>
+
+    <section class="depth-section" data-category="1depth">
+        <h2>1Depth 컴포넌트</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>1Depth - 항목1</h3>
+                <p>요약 설명입니다.</p>
+                <div class="preview-box">미리보기</div>
+                <button class="view-detail">자세히 보기</button>
+                <div class="modal-data" style="display: none;">
+                    <div class="detail-content">
+                        <h4>1Depth 항목1 상세</h4>
+                        <p>항목 1에 대한 상세 내용입니다.</p>
+                        <div class="detail-img-box">상세 이미지 영역</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>1Depth - 항목2</h3>
+                <p>요약 설명입니다.</p>
+                <div class="preview-box">미리보기</div>
+                <button class="view-detail">자세히 보기</button>
+                <div class="modal-data" style="display: none;">
+                    <div class="detail-content">
+                        <h4>1Depth 항목2 상세</h4>
+                        <p>항목 2에 대한 상세 내용입니다.</p>
+                        <div class="detail-img-box" style="background:#f0f8ff;">상세 이미지 영역</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="depth-section" data-category="2depth">
+        <h2>2Depth 컴포넌트</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>2Depth - 항목1</h3>
+                <p>2Depth 첫 번째 요약입니다.</p>
+                <div class="preview-box">미리보기</div>
+                <button class="view-detail">자세히 보기</button>
+                <div class="modal-data" style="display: none;">
+                    <div class="detail-content">
+                        <h4>2Depth 항목1 상세</h4>
+                        <p>2Depth 상세 내용입니다.</p>
+                        <div class="detail-img-box" style="background:#fff5e6;">2Depth 이미지</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
