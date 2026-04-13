@@ -91,9 +91,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const openModal = (card) => {
         const dataNode = card.querySelector('.modal-data');
         if (dataNode) {
-            modalBody.innerHTML = dataNode.innerHTML; // 원본 데이터 그대로 복사
+            modalBody.innerHTML = dataNode.innerHTML;
             overlay.classList.add('active');
             document.body.classList.add('stop-scrolling');
+
+            const radios = modalBody.querySelectorAll('.btn-check');
+            const viewItems = modalBody.querySelectorAll('.view-item');
+
+            radios.forEach((radio, idx) => {
+                const newId = `modal-radio-${idx}`;
+                const label = modalBody.querySelector(`label[for="${radio.id}"]`);
+                radio.id = newId;
+                if (label) label.setAttribute('for', newId);
+            });
+
+            const showView = (idx) => {
+                viewItems.forEach((item, i) => {
+                    item.style.display = i === idx ? 'block' : 'none';
+                });
+            };
+
+            if (radios.length > 0) {
+                radios[0].checked = true;
+                showView(0);
+
+                radios.forEach((radio, idx) => {
+                    radio.addEventListener('change', () => {
+                        showView(idx);
+                    });
+                });
+            }
         }
     };
 
