@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>컴포넌트 가이드</title>
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" defer></script>
 </head>
@@ -24,62 +25,105 @@
     <section class="depth-section" data-category="1depth">
         <h2>1Depth 컴포넌트</h2>
         <div class="grid">
+
+            <!-- ============================================================
+                 카드: 1Depth - 항목1
+                 [병렬형 조합 구조]
+                 - 1depth 라디오 4개 (data-depth="1~4")
+                 - 2depth 라디오 3개 (data-depth="A~C")
+                 - view-item의 data-combo="1depth값-2depth값" 으로 조합 매칭
+                 - 탭 이름/개수 바꿀 때: label 텍스트, data-depth 값, data-combo 값만 맞춰 수정
+            ============================================================ -->
             <div class="card">
                 <h3>1Depth - 항목1</h3>
                 <p>요약 설명입니다.</p>
-                <div class="preview-box">Test</div>
+                <div class="preview-box">
+                    <img src="img/FT02_Feature Benefit_Bottom_wireframe.jpg" alt="미리보기">
+                </div>
                 <button class="view-detail">자세히 보기</button>
                 <div class="modal-data" style="display: none;">
-                    <div class="view-selector-group mb-3 d-flex justify-content-center gap-2">
-                        <input type="radio" class="btn-check" name="proj-detail-1" id="p1-v1" checked>
-                        <label class="btn btn-outline-dark btn-sm" for="p1-v1">1</label>
 
-                        <input type="radio" class="btn-check" name="proj-detail-1" id="p1-v2">
-                        <label class="btn btn-outline-dark btn-sm" for="p1-v2">2</label>
+                    <!-- 1depth 라디오 -->
+                    <div class="selector-row">
+                        <span class="selector-label">Component Type</span>
+                        <div class="view-selector-group" data-selector="depth1">
+                            <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v1" data-depth="1" checked>
+                            <label class="tab-label" for="p1-d1-v1">Image Bottom</label>
 
-                        <input type="radio" class="btn-check" name="proj-detail-1" id="p1-v3">
-                        <label class="btn btn-outline-dark btn-sm" for="p1-v3">3</label>
+                            <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v2" data-depth="2">
+                            <label class="tab-label" for="p1-d1-v2">Image Left</label>
 
-                        <input type="radio" class="btn-check" name="proj-detail-1" id="p1-v4">
-                        <label class="btn btn-outline-dark btn-sm" for="p1-v4">4</label>
+                            <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v3" data-depth="3">
+                            <label class="tab-label" for="p1-d1-v3">Image Right</label>
+
+                            <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v4" data-depth="4">
+                            <label class="tab-label" for="p1-d1-v4">탭4</label>
+                        </div>
                     </div>
 
+                    <!-- 2depth 라디오 -->
+                    <div class="selector-row">
+                        <span class="selector-label">2Depth</span>
+                        <div class="view-selector-group" data-selector="depth2">
+                            <input type="radio" class="tab-radio" name="p1-depth2" id="p1-d2-v1" data-depth="A" checked>
+                            <label class="tab-label" for="p1-d2-v1">탭A</label>
+
+                            <input type="radio" class="tab-radio" name="p1-depth2" id="p1-d2-v2" data-depth="B">
+                            <label class="tab-label" for="p1-d2-v2">탭B</label>
+
+                            <input type="radio" class="tab-radio" name="p1-depth2" id="p1-d2-v3" data-depth="C">
+                            <label class="tab-label" for="p1-d2-v3">탭C</label>
+                        </div>
+                    </div>
+
+                    <!-- 조합별 이미지: data-combo="1depth값-2depth값" -->
                     <div class="detail-display-area">
-                        <div class="view-item v1-img"><img src="img/FTD16_Content 1_PC.jpg" class="img-fluid rounded" alt="Detail 1"></div>
-                        <div class="view-item v2-img"><img src="img/FTD16_Content 2_PC.jpg" class="img-fluid rounded" alt="Detail 2"></div>
-                        <div class="view-item v3-img"><img src="img/FTD16_Content 3_PC.jpg" class="img-fluid rounded" alt="Detail 3"></div>
-                        <div class="view-item v4-img"><img src="img/FTD16_Content 1_PC.jpg" class="img-fluid rounded" alt="Detail 4"></div>
+                        <div class="view-item" data-combo="1-A"><img src="img/FT02_Feature Benefit_Bottom.jpg" alt="1-A"></div>
+                        <div class="view-item" data-combo="1-B"><img src="img/FTD16_Content 2_PC.jpg" alt="1-B"></div>
+                        <div class="view-item" data-combo="1-C"><img src="img/FTD16_Content 3_PC.jpg" alt="1-C"></div>
+                        <div class="view-item" data-combo="2-A"><img src="img/FT02_Feature Benefit_Left.jpg" alt="2-A"></div>
+                        <div class="view-item" data-combo="2-B"><img src="img/FT02_Feature Benefit_Bottom.jpg" alt="2-B"></div>
+                        <div class="view-item" data-combo="2-C"><img src="img/FTD16_Content 2_PC.jpg" alt="2-C"></div>
+                        <div class="view-item" data-combo="3-A"><img src="img/FT02_Feature Benefit_Right.jpg" alt="3-A"></div>
+                        <div class="view-item" data-combo="3-B"><img src="img/FTD16_Content 1_PC.jpg" alt="3-B"></div>
+                        <div class="view-item" data-combo="3-C"><img src="img/FT02_Feature Benefit_Bottom.jpg" alt="3-C"></div>
+                        <div class="view-item" data-combo="4-A"><img src="img/FTD16_Content 2_PC.jpg" alt="4-A"></div>
+                        <div class="view-item" data-combo="4-B"><img src="img/FTD16_Content 3_PC.jpg" alt="4-B"></div>
+                        <div class="view-item" data-combo="4-C"><img src="img/FTD16_Content 1_PC.jpg" alt="4-C"></div>
                     </div>
-                    <hr>
-                    <p class="mt-3">여기에 기존 프로젝트 상세 설명을 넣으시면 됩니다.</p>
+
+                    <p class="modal-desc">여기에 기존 프로젝트 상세 설명을 넣으시면 됩니다.</p>
                 </div>
             </div>
+
+            <!-- 카드: 1Depth - 항목2 (단일 depth 구조 유지) -->
             <div class="card">
                 <h3>1Depth - 항목2</h3>
                 <p>요약 설명입니다.</p>
                 <div class="preview-box">미리보기</div>
                 <button class="view-detail">자세히 보기</button>
                 <div class="modal-data" style="display: none;">
-                    <div class="view-selector-group mb-3 d-flex justify-content-center gap-2">
-                        <input type="radio" class="btn-check" name="proj-detail-2" id="p2-v1" checked>
-                        <label class="btn btn-outline-dark btn-sm" for="p2-v1">1</label>
+                    <div class="view-selector-group">
+                        <input type="radio" class="tab-radio" name="proj-detail-2" id="p2-v1" checked>
+                        <label class="tab-label" for="p2-v1">1</label>
 
-                        <input type="radio" class="btn-check" name="proj-detail-2" id="p2-v2">
-                        <label class="btn btn-outline-dark btn-sm" for="p2-v2">2</label>
+                        <input type="radio" class="tab-radio" name="proj-detail-2" id="p2-v2">
+                        <label class="tab-label" for="p2-v2">2</label>
                     </div>
                     <div class="detail-display-area">
-                        <div class="view-item v1-img">
+                        <div class="view-item">
                             <h4>1Depth 항목2 상세</h4>
                             <p>항목 2에 대한 상세 내용입니다.</p>
                             <div class="detail-img-box" style="background:#f0f8ff;">상세 이미지 영역</div>
                         </div>
-                        <div class="view-item v2-img">
+                        <div class="view-item">
                             <h4>1Depth 항목2 - 두 번째 뷰</h4>
                             <p>두 번째 내용입니다.</p>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -92,20 +136,20 @@
                 <div class="preview-box">미리보기</div>
                 <button class="view-detail">자세히 보기</button>
                 <div class="modal-data" style="display: none;">
-                    <div class="view-selector-group mb-3 d-flex justify-content-center gap-2">
-                        <input type="radio" class="btn-check" name="proj-detail-3" id="p3-v1" checked>
-                        <label class="btn btn-outline-dark btn-sm" for="p3-v1">1</label>
+                    <div class="view-selector-group">
+                        <input type="radio" class="tab-radio" name="proj-detail-3" id="p3-v1" checked>
+                        <label class="tab-label" for="p3-v1">1</label>
 
-                        <input type="radio" class="btn-check" name="proj-detail-3" id="p3-v2">
-                        <label class="btn btn-outline-dark btn-sm" for="p3-v2">2</label>
+                        <input type="radio" class="tab-radio" name="proj-detail-3" id="p3-v2">
+                        <label class="tab-label" for="p3-v2">2</label>
                     </div>
                     <div class="detail-display-area">
-                        <div class="view-item v1-img">
+                        <div class="view-item">
                             <h4>2Depth 항목1 상세</h4>
                             <p>2Depth 상세 내용입니다.</p>
                             <div class="detail-img-box" style="background:#fff5e6;">2Depth 이미지</div>
                         </div>
-                        <div class="view-item v2-img">
+                        <div class="view-item">
                             <h4>2Depth 항목1 - 두 번째 뷰</h4>
                             <p>두 번째 내용입니다.</p>
                         </div>
