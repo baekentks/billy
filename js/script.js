@@ -190,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function initComboMode(container) {
         const depth1Group = container.querySelector('[data-selector="depth1"]');
         const depth2Group = container.querySelector('[data-selector="depth2"]');
+        const depth2Row = depth2Group.closest('.selector-row');
         const viewItems = container.querySelectorAll('.view-item[data-combo]');
 
         let selected = {
@@ -200,10 +201,27 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const showCombo = () => {
-            const comboKey = `${selected.depth1}-${selected.depth2}`;
-            viewItems.forEach(item => {
-                item.style.display = (item.getAttribute('data-combo') === comboKey) ? 'flex' : 'none';
-            });
+            const isAll = selected.depth1 === 'all';
+            const displayArea = container.querySelector('.detail-display-area');
+
+            // ALL일 때 2Depth 행 숨김, 나머지는 표시
+            if (depth2Row) depth2Row.style.display = isAll ? 'none' : 'flex';
+
+            if (isAll) {
+                displayArea.classList.add('is-all-mode');
+                viewItems.forEach(item => {
+                    item.style.display = (item.getAttribute('data-combo') === 'all') ? 'flex' : 'none';
+                });
+                // 스크롤 맨 위(Bottom)부터 시작
+                displayArea.scrollTop = 0;
+            } else {
+                displayArea.classList.remove('is-all-mode');
+                const comboKey = `${selected.depth1}-${selected.depth2}`;
+                viewItems.forEach(item => {
+                    item.style.display = (item.getAttribute('data-combo') === comboKey) ? 'flex' : 'none';
+                });
+            }
+
             // 탭 전환 후 현재 wireframe 상태 재적용
             applyWireframeState(container, isWireframe);
         };
