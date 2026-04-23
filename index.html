@@ -4,162 +4,479 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>컴포넌트 가이드</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" defer></script>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>컴포넌트 소개</h1>
-        <p class="subtitle">다양한 UI 컴포넌트를 살펴보세요</p>
-    </header>
-
-    <div class="filter-group">
-        <button class="filter-btn active" data-filter="all">전체</button>
-        <button class="filter-btn" data-filter="1depth">1Depth</button>
-        <button class="filter-btn" data-filter="2depth">2Depth</button>
+<!-- TOP NAV -->
+<nav class="top-nav">
+    <div class="nav-logo">Component<span>.</span>Guide</div>
+    <div class="nav-divider"></div>
+    <div class="nav-search">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="6.5" cy="6.5" r="4.5"/>
+            <path d="M10 10l3.5 3.5"/>
+        </svg>
+        Search components...
     </div>
+    <div class="nav-spacer"></div>
+    <div class="nav-links">
+        <span class="nav-link active">Components</span>
+        <span class="nav-link">Guidelines</span>
+        <span class="nav-link">About</span>
+    </div>
+</nav>
 
-    <section class="depth-section" data-category="1depth">
-        <h2>1Depth 컴포넌트</h2>
-        <div class="grid">
+<div class="layout">
 
-            <!-- ============================================================
-                 카드: 1Depth - 항목1
-                 [병렬형 조합 구조]
-                 - 1depth 라디오 4개 (data-depth="1~4")
-                 - 2depth 라디오 3개 (data-depth="A~C")
-                 - view-item의 data-combo="1depth값-2depth값" 으로 조합 매칭
-                 - 탭 이름/개수 바꿀 때: label 텍스트, data-depth 값, data-combo 값만 맞춰 수정
-            ============================================================ -->
-            <div class="card">
-                <h3>1Depth - 항목1</h3>
-                <p>요약 설명입니다.</p>
-                <div class="preview-box">
-                    <img src="img/FT02_Feature Benefit_Bottom.jpg" alt="미리보기">
-                </div>
-                <button class="view-detail">자세히 보기</button>
-                <div class="modal-data" style="display: none;">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
 
-                    <!-- 1depth 라디오 -->
-                    <div class="selector-row">
-                        <span class="selector-label">Component Type</span>
-                        <div class="view-selector-group" data-selector="depth1">
-                            <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v1" data-depth="all" checked>
-                            <label class="tab-label" for="p1-d1-v1">ALL</label>
-
-                            <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v2" data-depth="2">
-                            <label class="tab-label" for="p1-d1-v2">Image Bottom</label>
-
-                            <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v3" data-depth="3">
-                            <label class="tab-label" for="p1-d1-v3">Image Left</label>
-
-                            <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v4" data-depth="4">
-                            <label class="tab-label" for="p1-d1-v4">Image Right</label>
-                        </div>
-                    </div>
-
-                    <!-- 2depth 라디오 -->
-                    <div class="selector-row">
-                        <span class="selector-label">2Depth</span>
-                        <div class="view-selector-group" data-selector="depth2">
-                            <input type="radio" class="tab-radio" name="p1-depth2" id="p1-d2-v1" data-depth="A" checked>
-                            <label class="tab-label" for="p1-d2-v1">탭A</label>
-
-                            <input type="radio" class="tab-radio" name="p1-depth2" id="p1-d2-v2" data-depth="B">
-                            <label class="tab-label" for="p1-d2-v2">탭B</label>
-
-                            <input type="radio" class="tab-radio" name="p1-depth2" id="p1-d2-v3" data-depth="C">
-                            <label class="tab-label" for="p1-d2-v3">탭C</label>
-                        </div>
-                    </div>
-
-                    <!-- 조합별 이미지: data-combo="1depth값-2depth값" / ALL은 data-combo="all" -->
-                    <div class="detail-display-area">
-                        <div class="view-item" data-combo="all">
-                            <img src="img/FT02_Feature Benefit_Bottom.jpg" alt="all-bottom">
-                            <img src="img/FT02_Feature Benefit_Left.jpg" alt="all-left">
-                            <img src="img/FT02_Feature Benefit_Right.jpg" alt="all-right">
-                        </div>
-                        <div class="view-item" data-combo="2-A"><img src="img/FT02_Feature Benefit_Bottom.jpg" alt="2-A"></div>
-                        <div class="view-item" data-combo="2-B"><img src="img/FTD16_Content 2_PC.jpg" alt="2-B"></div>
-                        <div class="view-item" data-combo="2-C"><img src="img/FTD16_Content 3_PC.jpg" alt="2-C"></div>
-                        <div class="view-item" data-combo="3-A"><img src="img/FT02_Feature Benefit_Left.jpg" alt="3-A"></div>
-                        <div class="view-item" data-combo="3-B"><img src="img/FT02_Feature Benefit_Bottom.jpg" alt="3-B"></div>
-                        <div class="view-item" data-combo="3-C"><img src="img/FTD16_Content 2_PC.jpg" alt="3-C"></div>
-                        <div class="view-item" data-combo="4-A"><img src="img/FT02_Feature Benefit_Right.jpg" alt="4-A"></div>
-                        <div class="view-item" data-combo="4-B"><img src="img/FTD16_Content 1_PC.jpg" alt="4-B"></div>
-                        <div class="view-item" data-combo="4-C"><img src="img/FT02_Feature Benefit_Bottom.jpg" alt="4-C"></div>
-                    </div>
-
-                    <p class="modal-desc">여기에 기존 프로젝트 상세 설명을 넣으시면 됩니다.</p>
-                </div>
-            </div>
-
-            <!-- 카드: 1Depth - 항목2 (단일 depth 구조 유지) -->
-            <div class="card">
-                <h3>1Depth - 항목2</h3>
-                <p>요약 설명입니다.</p>
-                <div class="preview-box">미리보기</div>
-                <button class="view-detail">자세히 보기</button>
-                <div class="modal-data" style="display: none;">
-                    <div class="view-selector-group">
-                        <input type="radio" class="tab-radio" name="proj-detail-2" id="p2-v1" checked>
-                        <label class="tab-label" for="p2-v1">1</label>
-
-                        <input type="radio" class="tab-radio" name="proj-detail-2" id="p2-v2">
-                        <label class="tab-label" for="p2-v2">2</label>
-                    </div>
-                    <div class="detail-display-area">
-                        <div class="view-item">
-                            <h4>1Depth 항목2 상세</h4>
-                            <p>항목 2에 대한 상세 내용입니다.</p>
-                            <div class="detail-img-box" style="background:#f0f8ff;">상세 이미지 영역</div>
-                        </div>
-                        <div class="view-item">
-                            <h4>1Depth 항목2 - 두 번째 뷰</h4>
-                            <p>두 번째 내용입니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <!-- 최상위 전체 -->
+        <div class="sidebar-item sidebar-item-all active" data-filter="all" data-group="all" data-sub="all">
+            전체
+            <span class="sidebar-count">9</span>
         </div>
-    </section>
 
-    <section class="depth-section" data-category="2depth">
-        <h2>2Depth 컴포넌트</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>2Depth - 항목1</h3>
-                <p>2Depth 첫 번째 요약입니다.</p>
-                <div class="preview-box">미리보기</div>
-                <button class="view-detail">자세히 보기</button>
-                <div class="modal-data" style="display: none;">
-                    <div class="view-selector-group">
-                        <input type="radio" class="tab-radio" name="proj-detail-3" id="p3-v1" checked>
-                        <label class="tab-label" for="p3-v1">1</label>
-
-                        <input type="radio" class="tab-radio" name="proj-detail-3" id="p3-v2">
-                        <label class="tab-label" for="p3-v2">2</label>
+        <!-- AEM -->
+        <div class="sidebar-section open" data-category="aem">
+            <div class="sidebar-section-title">
+                AEM
+            </div>
+            <div class="sidebar-items">
+                <!-- NV 폴더 -->
+                <div class="sidebar-folder" data-category="aem" data-group="nv">
+                    <div class="sidebar-folder-title">
+                        Navigation (NV)
+                        <span class="sidebar-arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4.5,3 7.5,6 4.5,9"/></svg></span>
                     </div>
-                    <div class="detail-display-area">
-                        <div class="view-item">
-                            <h4>2Depth 항목1 상세</h4>
-                            <p>2Depth 상세 내용입니다.</p>
-                            <div class="detail-img-box" style="background:#fff5e6;">2Depth 이미지</div>
+                    <div class="sidebar-folder-items">
+                        <div class="sidebar-item" data-filter="aem" data-group="nv" data-sub="0">
+                            NV01
                         </div>
-                        <div class="view-item">
-                            <h4>2Depth 항목1 - 두 번째 뷰</h4>
-                            <p>두 번째 내용입니다.</p>
+                    </div>
+                </div>
+                <!-- CO 폴더 -->
+                <div class="sidebar-folder" data-category="aem" data-group="co">
+                    <div class="sidebar-folder-title">
+                        Common (CO)
+                        <span class="sidebar-arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4.5,3 7.5,6 4.5,9"/></svg></span>
+                    </div>
+                    <div class="sidebar-folder-items">
+                        <div class="sidebar-item" data-filter="aem" data-group="co" data-sub="0">
+                            CO01
+                        </div>
+                    </div>
+                </div>
+                <!-- HD 폴더 -->
+                <div class="sidebar-folder" data-category="aem" data-group="hd">
+                    <div class="sidebar-folder-title">
+                        Header (HD)
+                        <span class="sidebar-arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4.5,3 7.5,6 4.5,9"/></svg></span>
+                    </div>
+                    <div class="sidebar-folder-items">
+                        <div class="sidebar-item" data-filter="aem" data-group="hd" data-sub="0">
+                            HD01
+                        </div>
+                    </div>
+                </div>
+                <!-- PD 폴더 -->
+                <div class="sidebar-folder" data-category="aem" data-group="pd">
+                    <div class="sidebar-folder-title">
+                        Product (PD)
+                        <span class="sidebar-arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4.5,3 7.5,6 4.5,9"/></svg></span>
+                    </div>
+                    <div class="sidebar-folder-items">
+                        <div class="sidebar-item" data-filter="aem" data-group="pd" data-sub="0">
+                            PD01
+                        </div>
+                    </div>
+                </div>
+                <!-- FN 폴더 -->
+                <div class="sidebar-folder" data-category="aem" data-group="fn">
+                    <div class="sidebar-folder-title">
+                        Function (FN)
+                        <span class="sidebar-arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4.5,3 7.5,6 4.5,9"/></svg></span>
+                    </div>
+                    <div class="sidebar-folder-items">
+                        <div class="sidebar-item" data-filter="aem" data-group="fn" data-sub="0">
+                            FN01
+                        </div>
+                    </div>
+                </div>
+                <!-- OT 폴더 -->
+                <div class="sidebar-folder" data-category="aem" data-group="ot">
+                    <div class="sidebar-folder-title">
+                        Other (OT)
+                        <span class="sidebar-arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4.5,3 7.5,6 4.5,9"/></svg></span>
+                    </div>
+                    <div class="sidebar-folder-items">
+                        <div class="sidebar-item" data-filter="aem" data-group="ot" data-sub="0">
+                            OT01
+                        </div>
+                    </div>
+                </div>
+                <!-- FT 폴더 -->
+                <div class="sidebar-folder" data-category="aem" data-group="ft">
+                    <div class="sidebar-folder-title">
+                        Feature (FT)
+                        <span class="sidebar-arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4.5,3 7.5,6 4.5,9"/></svg></span>
+                    </div>
+                    <div class="sidebar-folder-items">
+                        <div class="sidebar-item" data-filter="aem" data-group="ft" data-sub="0">
+                            FT02_Feature Benefit
+                        </div>
+                        <div class="sidebar-item" data-filter="aem" data-group="ft" data-sub="1">
+                            FT03
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+
+        <!-- PIM -->
+        <div class="sidebar-section open" data-category="pim">
+            <div class="sidebar-section-title">
+                PIM
+            </div>
+            <div class="sidebar-items">
+                <div class="sidebar-folder" data-category="pim" data-group="ftd">
+                    <div class="sidebar-folder-title">
+                        FTD
+                        <span class="sidebar-arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4.5,3 7.5,6 4.5,9"/></svg></span>
+                    </div>
+                    <div class="sidebar-folder-items">
+                        <div class="sidebar-item" data-filter="pim" data-group="ftd" data-sub="0">
+                            FTD - 항목1
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="page-header-eyebrow">UI Library</div>
+            <h1>컴포넌트 가이드</h1>
+            <p class="page-header-desc">다양한 UI 컴포넌트를 탐색하고 와이어프레임과 실제 디자인을 비교해보세요.</p>
+        </div>
+
+        <!-- FILTER TOOLBAR -->
+        <div class="filter-toolbar">
+            <div class="filter-toolbar-left">
+                <span class="filter-label">Filter</span>
+                <button class="filter-btn active" data-filter="all" data-group="all">전체</button>
+                <button class="filter-btn" data-filter="aem" data-group="all">AEM</button>
+                <button class="filter-btn" data-filter="pim" data-group="all">PIM</button>
+                <div class="filter-divider"></div>
+            </div>
+            <div class="sub-filter-group" id="subFilterGroup"></div>
+            <div class="filter-spacer"></div>
+            <span class="filter-count" id="filterCount">9 components</span>
+        </div>
+
+        <!-- GRID AREA -->
+        <div class="grid-area">
+
+            <!-- AEM > NV 섹션 -->
+            <section class="depth-section" data-category="aem" data-group="nv">
+                <h2>AEM · NV</h2>
+                <div class="grid">
+                    <div class="card" data-category="aem" data-group="nv" data-sub="0">
+                        <div class="card-preview-empty">
+                            <span class="card-preview-label">이미지 준비 중</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta"><span class="card-category">Navigation</span></div>
+                            <h3>NV01</h3>
+                            <p>준비 중입니다.</p>
+                            <button class="view-detail">자세히 보기</button>
+                        </div>
+                        <div class="modal-data">
+                            <div class="detail-display-area">
+                                <div class="view-item" style="display:flex;">
+                                    <div style="padding:60px; text-align:center; color:#aaa; font-size:14px;">상세 이미지 준비 중</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AEM > CO 섹션 -->
+            <section class="depth-section" data-category="aem" data-group="co">
+                <h2>AEM · CO</h2>
+                <div class="grid">
+                    <div class="card" data-category="aem" data-group="co" data-sub="0">
+                        <div class="card-preview-empty">
+                            <span class="card-preview-label">이미지 준비 중</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta"><span class="card-category">Component</span></div>
+                            <h3>CO01</h3>
+                            <p>준비 중입니다.</p>
+                            <button class="view-detail">자세히 보기</button>
+                        </div>
+                        <div class="modal-data">
+                            <div class="detail-display-area">
+                                <div class="view-item" style="display:flex;">
+                                    <div style="padding:60px; text-align:center; color:#aaa; font-size:14px;">상세 이미지 준비 중</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AEM > HD 섹션 -->
+            <section class="depth-section" data-category="aem" data-group="hd">
+                <h2>AEM · HD</h2>
+                <div class="grid">
+                    <div class="card" data-category="aem" data-group="hd" data-sub="0">
+                        <div class="card-preview-empty">
+                            <span class="card-preview-label">이미지 준비 중</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta"><span class="card-category">Header</span></div>
+                            <h3>HD01</h3>
+                            <p>준비 중입니다.</p>
+                            <button class="view-detail">자세히 보기</button>
+                        </div>
+                        <div class="modal-data">
+                            <div class="detail-display-area">
+                                <div class="view-item" style="display:flex;">
+                                    <div style="padding:60px; text-align:center; color:#aaa; font-size:14px;">상세 이미지 준비 중</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AEM > PD 섹션 -->
+            <section class="depth-section" data-category="aem" data-group="pd">
+                <h2>AEM · PD</h2>
+                <div class="grid">
+                    <div class="card" data-category="aem" data-group="pd" data-sub="0">
+                        <div class="card-preview-empty">
+                            <span class="card-preview-label">이미지 준비 중</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta"><span class="card-category">Component</span></div>
+                            <h3>PD01</h3>
+                            <p>준비 중입니다.</p>
+                            <button class="view-detail">자세히 보기</button>
+                        </div>
+                        <div class="modal-data">
+                            <div class="detail-display-area">
+                                <div class="view-item" style="display:flex;">
+                                    <div style="padding:60px; text-align:center; color:#aaa; font-size:14px;">상세 이미지 준비 중</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AEM > FN 섹션 -->
+            <section class="depth-section" data-category="aem" data-group="fn">
+                <h2>AEM · FN</h2>
+                <div class="grid">
+                    <div class="card" data-category="aem" data-group="fn" data-sub="0">
+                        <div class="card-preview-empty">
+                            <span class="card-preview-label">이미지 준비 중</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta"><span class="card-category">Component</span></div>
+                            <h3>FN01</h3>
+                            <p>준비 중입니다.</p>
+                            <button class="view-detail">자세히 보기</button>
+                        </div>
+                        <div class="modal-data">
+                            <div class="detail-display-area">
+                                <div class="view-item" style="display:flex;">
+                                    <div style="padding:60px; text-align:center; color:#aaa; font-size:14px;">상세 이미지 준비 중</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AEM > OT 섹션 -->
+            <section class="depth-section" data-category="aem" data-group="ot">
+                <h2>AEM · OT</h2>
+                <div class="grid">
+                    <div class="card" data-category="aem" data-group="ot" data-sub="0">
+                        <div class="card-preview-empty">
+                            <span class="card-preview-label">이미지 준비 중</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta"><span class="card-category">Other</span></div>
+                            <h3>OT01</h3>
+                            <p>준비 중입니다.</p>
+                            <button class="view-detail">자세히 보기</button>
+                        </div>
+                        <div class="modal-data">
+                            <div class="detail-display-area">
+                                <div class="view-item" style="display:flex;">
+                                    <div style="padding:60px; text-align:center; color:#aaa; font-size:14px;">상세 이미지 준비 중</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AEM > FT 섹션 -->
+            <section class="depth-section" data-category="aem" data-group="ft">
+                <h2>AEM · FT</h2>
+                <div class="grid">
+
+                    <!-- FT02_Feature Benefit -->
+                    <div class="card" data-category="aem" data-group="ft" data-sub="0">
+                        <div class="card-preview">
+                            <img src="img/FT02_Feature_Benefit_Bottom_PC.jpg" alt="Feature Benefit Bottom">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <span class="card-category">Feature Benefit</span>
+                            </div>
+                            <h3>FT02_Feature Benefit</h3>
+                            <p>Image Bottom / Left / Right 레이아웃 변형을 지원하는 피처 베네핏 컴포넌트입니다.</p>
+                            <button class="view-detail">자세히 보기</button>
+                        </div>
+                        <div class="modal-data">
+                            <div class="selector-row" data-viewport-type="desktop">
+                                <span class="selector-label">Type</span>
+                                <div class="view-selector-group" data-selector="depth1">
+                                    <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v1" data-depth="all" checked>
+                                    <label class="tab-label" for="p1-d1-v1">ALL</label>
+                                    <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v2" data-depth="2">
+                                    <label class="tab-label" for="p1-d1-v2">Image Bottom</label>
+                                    <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v3" data-depth="3">
+                                    <label class="tab-label" for="p1-d1-v3">Image Left</label>
+                                    <input type="radio" class="tab-radio" name="p1-depth1" id="p1-d1-v4" data-depth="4">
+                                    <label class="tab-label" for="p1-d1-v4">Image Right</label>
+                                </div>
+                            </div>
+                            <div class="selector-row hidden" data-viewport-type="mobile">
+                                <span class="selector-label">Type</span>
+                                <div class="view-selector-group" data-selector="depth1-mo">
+                                    <input type="radio" class="tab-radio" name="p1-depth1-mo" id="p1-d1-mo-v1" data-depth="all-mo" checked>
+                                    <label class="tab-label" for="p1-d1-mo-v1">ALL</label>
+                                    <input type="radio" class="tab-radio" name="p1-depth1-mo" id="p1-d1-mo-v2" data-depth="mo-center">
+                                    <label class="tab-label" for="p1-d1-mo-v2">Text Center</label>
+                                    <input type="radio" class="tab-radio" name="p1-depth1-mo" id="p1-d1-mo-v3" data-depth="mo-left">
+                                    <label class="tab-label" for="p1-d1-mo-v3">Text Left</label>
+                                    <input type="radio" class="tab-radio" name="p1-depth1-mo" id="p1-d1-mo-v4" data-depth="mo-right">
+                                    <label class="tab-label" for="p1-d1-mo-v4">Text Right</label>
+                                </div>
+                            </div>
+                            <!-- 2depth 라디오 (임시 숨김) -->
+                            <div class="selector-row hidden">
+                                <span class="selector-label">2Depth</span>
+                                <div class="view-selector-group" data-selector="depth2">
+                                    <input type="radio" class="tab-radio" name="p1-depth2" id="p1-d2-v1" data-depth="A" checked>
+                                    <label class="tab-label" for="p1-d2-v1">탭A</label>
+                                    <input type="radio" class="tab-radio" name="p1-depth2" id="p1-d2-v2" data-depth="B">
+                                    <label class="tab-label" for="p1-d2-v2">탭B</label>
+                                    <input type="radio" class="tab-radio" name="p1-depth2" id="p1-d2-v3" data-depth="C">
+                                    <label class="tab-label" for="p1-d2-v3">탭C</label>
+                                </div>
+                            </div>
+                            <div class="detail-display-area-wrap">
+                            <div class="detail-display-area">
+                                <!-- Desktop -->
+                                <div class="view-item" data-combo="all">
+                                    <img src="img/FT02_Feature_Benefit_Bottom_PC.jpg" alt="all-bottom">
+                                    <img src="img/FT02_Feature_Benefit_Left_PC.jpg" alt="all-left">
+                                    <img src="img/FT02_Feature_Benefit_Right_PC.jpg" alt="all-right">
+                                </div>
+                                <div class="view-item" data-combo="2"><img src="img/FT02_Feature_Benefit_Bottom_PC.jpg" alt="2"></div>
+                                <div class="view-item" data-combo="3"><img src="img/FT02_Feature_Benefit_Left_PC.jpg" alt="3"></div>
+                                <div class="view-item" data-combo="4"><img src="img/FT02_Feature_Benefit_Right_PC.jpg" alt="4"></div>
+                                <!-- Mobile -->
+                                <div class="view-item" data-combo="all-mo">
+                                    <img src="img/FT02_Feature_Benefit_Center_MO.jpg" alt="all-mo-center">
+                                    <img src="img/FT02_Feature_Benefit_Left_MO.jpg" alt="all-mo-left">
+                                    <img src="img/FT02_Feature_Benefit_Right_MO.jpg" alt="all-mo-right">
+                                </div>
+                                <div class="view-item" data-combo="mo-center"><img src="img/FT02_Feature_Benefit_Center_MO.jpg" alt="mo-center"></div>
+                                <div class="view-item" data-combo="mo-left"><img src="img/FT02_Feature_Benefit_Left_MO.jpg" alt="mo-left"></div>
+                                <div class="view-item" data-combo="mo-right"><img src="img/FT02_Feature_Benefit_Right_MO.jpg" alt="mo-right"></div>
+                            </div>
+                            </div>
+                            <p class="modal-desc">여기에 기존 프로젝트 상세 설명을 넣으시면 됩니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- FT03 준비 중 -->
+                    <div class="card" data-category="aem" data-group="ft" data-sub="1">
+                        <div class="card-preview-empty">
+                            <span class="card-preview-label">이미지 준비 중</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <span class="card-category">Feature</span>
+                            </div>
+                            <h3>FT03</h3>
+                            <p>준비 중입니다.</p>
+                            <button class="view-detail">자세히 보기</button>
+                        </div>
+                        <div class="modal-data">
+                            <div class="detail-display-area">
+                                <div class="view-item" style="display:flex;">
+                                    <div style="padding:60px; text-align:center; color:#aaa; font-size:14px;">상세 이미지 준비 중</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- PIM > FTD 섹션 -->
+            <section class="depth-section" data-category="pim" data-group="ftd">
+                <h2>PIM · FTD</h2>
+                <div class="grid">
+
+                    <div class="card" data-category="pim" data-group="ftd" data-sub="0">
+                        <div class="card-preview-empty">
+                            <span class="card-preview-label">이미지 준비 중</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <span class="card-category">Component</span>
+                            </div>
+                            <h3>FTD - 항목1</h3>
+                            <p>준비 중입니다.</p>
+                            <button class="view-detail">자세히 보기</button>
+                        </div>
+                        <div class="modal-data">
+                            <div class="detail-display-area">
+                                <div class="view-item" style="display:flex;">
+                                    <div style="padding:60px; text-align:center; color:#aaa; font-size:14px;">상세 이미지 준비 중</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div><!-- /grid-area -->
+    </main>
 </div>
 
 </body>
