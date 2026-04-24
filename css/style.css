@@ -630,10 +630,11 @@ body.stop-scrolling { overflow: hidden !important; }
     color: var(--modal-text);
     width: 92%;
     max-width: 1376px;
-    max-height: 90vh;
+    height: 982px;
+    max-height: 982px;
     border-radius: 20px;
     padding: 48px 48px 36px;
-    overflow-y: hidden;
+    overflow: hidden;
     transform: translateY(16px) scale(0.99);
     transition: transform 0.35s ease;
     box-shadow: 0 40px 100px rgba(0,0,0,0.5);
@@ -752,8 +753,9 @@ body.stop-scrolling { overflow: hidden !important; }
 /* Modal image area */
 .detail-display-area {
     width: 100%;
+    max-width: 1280px;
     height: 720px;
-    margin: 14px 0;
+    margin: 14px auto;
     border: 1px solid #eee;
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -778,15 +780,33 @@ body.stop-scrolling { overflow: hidden !important; }
 
 .detail-display-area.is-all-mode {
     overflow-y: scroll;
+    overflow-x: hidden;
     justify-content: flex-start;
     align-items: flex-start;
     scrollbar-width: thin;
     scrollbar-color: #ccc transparent;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    box-sizing: border-box;
+}
+
+.detail-display-area.is-all-mode::-webkit-scrollbar {
+    width: 6px;
+}
+
+.detail-display-area.is-all-mode::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.detail-display-area.is-all-mode::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .detail-display-area.is-all-mode .view-item[data-combo="all"] {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     height: auto;
 }
 
@@ -795,6 +815,8 @@ body.stop-scrolling { overflow: hidden !important; }
     height: auto;
     object-fit: contain;
     flex-shrink: 0;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .modal-desc {
