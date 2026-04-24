@@ -45,8 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let isWireframe = true;
     let isMobile    = false;
 
-    // ── 카운트 업데이트 ────────────────────────────────────
-    // [FIX] style 문자열 매칭 불안정 → 직접 비교로 변경
     function updateCount() {
         let count = 0;
         document.querySelectorAll('.depth-section:not(.hidden) .card').forEach(card => {
@@ -55,13 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
         filterCount.textContent = `${count} components`;
     }
 
-    // ── 전체 카드 보이기 ───────────────────────────────────
     function showAllCards() {
         sections.forEach(s => s.classList.remove('hidden'));
         cards.forEach(c => c.style.display = '');
     }
 
-    // ── 카테고리(AEM/PIM)만 필터 ──────────────────────────
     function filterByCategory(category) {
         sections.forEach(s => {
             s.classList.toggle('hidden', s.dataset.category !== category);
@@ -69,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cards.forEach(c => c.style.display = '');
     }
 
-    // ── 그룹(FT/FTD)만 필터 ──────────────────────────────
     function filterByGroup(category, group) {
         sections.forEach(s => {
             const match = s.dataset.category === category && s.dataset.group === group;
@@ -78,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cards.forEach(c => c.style.display = '');
     }
 
-    // ── 특정 카드만 필터 ──────────────────────────────────
     function filterByCard(category, group, sub) {
         sections.forEach(s => {
             const match = s.dataset.category === category && s.dataset.group === group;
@@ -93,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── 사이드바 active 동기화 ────────────────────────────
     function syncSidebar(filter, group, sub) {
         sidebarItems.forEach(item => {
             let match = false;
@@ -108,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── 서브 필터(그룹 버튼) 렌더 ────────────────────────
     function renderSubFilters(category) {
         subFilterGroup.innerHTML = '';
         if (category === 'all') return;
@@ -149,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── 필터 버튼 클릭 ────────────────────────────────────
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
@@ -169,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ── 폴더 active 동기화 ────────────────────────────────
     function syncFolderActive(category, group) {
         sidebarFolders.forEach(f => f.querySelector('.sidebar-folder-title').classList.remove('active'));
         document.querySelector('.sidebar-item-all').classList.remove('active');
@@ -180,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeFolder) activeFolder.querySelector('.sidebar-folder-title').classList.add('active');
     }
 
-    // ── 슬라이드 애니메이션 ───────────────────────────────
     function slideDown(el) {
         el.style.display = 'block';
         el.style.height = '0';
@@ -191,7 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { once: true });
     }
 
-    // [FIX] transitionend 후 display:none 처리 추가
     function slideUp(el) {
         el.style.height = el.scrollHeight + 'px';
         requestAnimationFrame(() => {
@@ -205,6 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── 사이드바 섹션 타이틀 클릭 ─────────────────────────
     sidebarSections.forEach(sec => {
         sec.querySelector('.sidebar-section-title').addEventListener('click', () => {
+            const items = sec.querySelector('.sidebar-items');
+            if (sec.classList.contains('open')) {
+                sec.classList.remove('open');
+                slideUp(items);
+            } else {
+                sec.classList.add('open');
+                slideDown(items);
+            }
             const category = sec.dataset.category;
             filterByCategory(category);
             filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === category));
@@ -241,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
     // ── 최상위 전체 클릭 ──────────────────────────────────
     document.querySelector('.sidebar-item-all').addEventListener('click', () => {
         showAllCards();
@@ -252,7 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCount();
     });
 
-    // ── Wireframe 이미지 경로 변환 ───────────────────────
     function applyWireframeState(container, wireframe) {
         container.querySelectorAll('.view-item img').forEach(img => {
             if (!img.dataset.srcOriginal) img.dataset.srcOriginal = img.src;
@@ -266,7 +260,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Viewport 토글 ─────────────────────────────────────
     viewportBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             if (btn.classList.contains('active')) return;
@@ -282,7 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const displayArea = modalBody.querySelector('.detail-display-area');
             if (displayArea) displayArea.classList.toggle('is-mobile-mode', isMobile);
 
-            // 첫번째 라디오 초기화
             const activeRow = isMobile ? mobileRow : desktopRow;
             if (activeRow) {
                 const firstRadio = activeRow.querySelector('.tab-radio');
@@ -294,7 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ── Wireframe 토글 ───────────────────────────────────
     wireframeToggle.addEventListener('click', () => {
         isWireframe = !isWireframe;
         wireframeToggle.dataset.state = isWireframe ? 'off' : 'on';
@@ -302,7 +293,6 @@ document.addEventListener('DOMContentLoaded', () => {
         applyWireframeState(modalBody, isWireframe);
     });
 
-    // ── 모달 오픈 ────────────────────────────────────────
     function openModal(card) {
         const dataNode = card.querySelector('.modal-data');
         if (!dataNode) return;
@@ -311,7 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.classList.add('active');
         document.body.classList.add('stop-scrolling');
 
-        // modal-desc 내용을 하단 고정 영역으로 이동
         const descEl     = modalBody.querySelector('.modal-desc');
         const descTarget = document.getElementById('modalDesc');
         if (descTarget) descTarget.textContent = descEl ? descEl.textContent : '';
@@ -323,13 +312,11 @@ document.addEventListener('DOMContentLoaded', () => {
         wireframeToggle.querySelector('.toggle-text').textContent = 'Off';
         viewportBtns.forEach(b => b.classList.toggle('active', b.dataset.viewport === 'desktop'));
 
-        // desktop selector-row 보이기, mobile 숨기기 초기화
         const desktopRow = modalBody.querySelector('[data-viewport-type="desktop"]');
         const mobileRow  = modalBody.querySelector('[data-viewport-type="mobile"]');
         if (desktopRow) desktopRow.classList.remove('hidden');
         if (mobileRow)  mobileRow.classList.add('hidden');
 
-        // [FIX] radio id 중복 방지 — timestamp 조합
         const uid = Date.now();
         modalBody.querySelectorAll('.tab-radio').forEach((radio, idx) => {
             const newId = `modal-radio-${uid}-${idx}`;
@@ -342,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
         isComboMode ? initComboMode(modalBody) : initSingleMode(modalBody);
     }
 
-    // ── 단일 depth 모드 ──────────────────────────────────
     function initSingleMode(container) {
         const radios    = container.querySelectorAll('.tab-radio');
         const viewItems = container.querySelectorAll('.view-item');
@@ -367,7 +353,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ── 병렬 조합 모드 ───────────────────────────────────
     function initComboMode(container) {
         const selectorKey = isMobile ? 'depth1-mo' : 'depth1';
         const depth1Group = container.querySelector(`[data-selector="${selectorKey}"]`);
@@ -387,7 +372,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (depth2Row) depth2Row.style.display = isAll ? 'none' : 'flex';
 
             if (isMobile) {
-                // 모바일 — is-active 클래스로 전환 (레이아웃 시프트 방지)
                 if (isAll) {
                     displayArea.classList.add('is-all-mode');
                     viewItems.forEach(item => {
@@ -402,7 +386,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             } else {
-                // 데스크탑 — 기존 display 방식 유지
                 if (isAll) {
                     displayArea.classList.add('is-all-mode');
                     viewItems.forEach(item => {
@@ -437,14 +420,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ── 모달 닫기 ────────────────────────────────────────
     function closeModal() {
         overlay.classList.remove('active');
         document.body.classList.remove('stop-scrolling');
         setTimeout(() => { modalBody.innerHTML = ''; }, 380);
     }
 
-    // ── 이벤트 ───────────────────────────────────────────
     document.addEventListener('click', e => {
         if (e.target?.classList.contains('view-detail')) {
             openModal(e.target.closest('.card'));
@@ -457,7 +438,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
     });
 
-    // ── 초기 카운트 + 높이 초기화 ────────────────────────
     updateCount();
 
     sidebarSections.forEach(sec => {
@@ -468,7 +448,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // [FIX] sidebar-folder-items 초기화 누락 보완
     sidebarFolders.forEach(folder => {
         const folderItems = folder.querySelector('.sidebar-folder-items');
         if (folder.classList.contains('open')) {

@@ -17,7 +17,7 @@
     --text-secondary: #a09d98;
     --text-muted:     #6b6865;
 
-    --accent:        #e8c547;   /* warm gold —포인트 컬러 */
+    --accent:        #e8c547;
     --accent-dim:    rgba(232, 197, 71, 0.12);
     --accent-hover:  #f0d060;
 
@@ -80,9 +80,7 @@ body.stop-scrolling { overflow: hidden !important; }
     white-space: nowrap;
 }
 
-.nav-logo span {
-    color: var(--accent);
-}
+.nav-logo span { color: var(--accent); }
 
 .nav-divider {
     width: 1px;
@@ -167,9 +165,7 @@ body.stop-scrolling { overflow: hidden !important; }
 .sidebar::-webkit-scrollbar-track { background: transparent; }
 .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-.sidebar-section {
-    margin-bottom: 8px;
-}
+.sidebar-section { margin-bottom: 8px; }
 
 .sidebar-section-title {
     display: flex;
@@ -206,12 +202,15 @@ body.stop-scrolling { overflow: hidden !important; }
     transform: rotate(90deg);
 }
 
+.sidebar-section.open .sidebar-section-title .sidebar-arrow {
+    transform: rotate(90deg);
+}
+
 .sidebar-items {
     overflow: hidden;
     height: 0;
     transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 
 .sidebar-item {
     display: flex;
@@ -378,7 +377,6 @@ body.stop-scrolling { overflow: hidden !important; }
     margin: 0 12px;
 }
 
-/* Sub filters */
 .sub-filter-group {
     display: flex;
     align-items: center;
@@ -418,9 +416,7 @@ body.stop-scrolling { overflow: hidden !important; }
 /* ===========================
    GRID AREA
 =========================== */
-.grid-area {
-    padding: 32px 48px 60px;
-}
+.grid-area { padding: 32px 48px 60px; }
 
 /* ===========================
    SECTION
@@ -474,7 +470,6 @@ body.stop-scrolling { overflow: hidden !important; }
     cursor: default;
 }
 
-/* Card preview */
 .card-preview {
     width: 100%;
     aspect-ratio: 16 / 10;
@@ -491,7 +486,6 @@ body.stop-scrolling { overflow: hidden !important; }
     display: block;
 }
 
-/* Empty preview */
 .card-preview-empty {
     width: 100%;
     aspect-ratio: 16 / 10;
@@ -523,7 +517,6 @@ body.stop-scrolling { overflow: hidden !important; }
     z-index: 1;
 }
 
-/* Card body */
 .card-body {
     padding: 18px 20px 20px;
     display: flex;
@@ -563,7 +556,6 @@ body.stop-scrolling { overflow: hidden !important; }
     margin-bottom: 16px;
 }
 
-/* View detail button */
 .view-detail {
     width: 100%;
     padding: 9px 16px;
@@ -599,6 +591,15 @@ body.stop-scrolling { overflow: hidden !important; }
 .modal-data { display: none; }
 
 /* ===========================
+   DETAIL DISPLAY WRAP
+=========================== */
+.detail-display-area-wrap {
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+/* ===========================
    MODAL OVERLAY
 =========================== */
 .modal-overlay {
@@ -631,10 +632,10 @@ body.stop-scrolling { overflow: hidden !important; }
     width: 92%;
     max-width: 1376px;
     height: 982px;
-    max-height: 982px;
+    max-height: min(982px, 90vh);
     border-radius: 20px;
     padding: 48px 48px 36px;
-    overflow: hidden;
+    overflow: hidden;           /* ← auto → hidden 으로 되돌리기 */
     transform: translateY(16px) scale(0.99);
     transition: transform 0.35s ease;
     box-shadow: 0 40px 100px rgba(0,0,0,0.5);
@@ -644,8 +645,6 @@ body.stop-scrolling { overflow: hidden !important; }
     transform: translateY(0) scale(1);
 }
 
-
-/* Modal header */
 .modal-header {
     display: flex;
     align-items: center;
@@ -700,7 +699,6 @@ body.stop-scrolling { overflow: hidden !important; }
     transform: rotate(90deg);
 }
 
-/* Modal tabs */
 .selector-row {
     display: flex;
     align-items: center;
@@ -750,7 +748,6 @@ body.stop-scrolling { overflow: hidden !important; }
     color: #fff;
 }
 
-/* Modal image area */
 .detail-display-area {
     width: 100%;
     max-width: 1280px;
@@ -789,18 +786,9 @@ body.stop-scrolling { overflow: hidden !important; }
     box-sizing: border-box;
 }
 
-.detail-display-area.is-all-mode::-webkit-scrollbar {
-    width: 6px;
-}
-
-.detail-display-area.is-all-mode::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 3px;
-}
-
-.detail-display-area.is-all-mode::-webkit-scrollbar-track {
-    background: transparent;
-}
+.detail-display-area.is-all-mode::-webkit-scrollbar { width: 6px; }
+.detail-display-area.is-all-mode::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+.detail-display-area.is-all-mode::-webkit-scrollbar-track { background: transparent; }
 
 .detail-display-area.is-all-mode .view-item[data-combo="all"] {
     display: flex;
@@ -908,7 +896,6 @@ body.stop-scrolling { overflow: hidden !important; }
 =========================== */
 .hidden { display: none !important; }
 
-/* 최상위 전체 아이템 */
 .sidebar-item-all {
     margin: 0 0 8px;
     padding: 10px 20px 10px 20px;
@@ -917,10 +904,7 @@ body.stop-scrolling { overflow: hidden !important; }
     border-bottom: 1px solid var(--border);
 }
 
-/* 폴더 (2depth) */
-.sidebar-folder {
-    margin-bottom: 2px;
-}
+.sidebar-folder { margin-bottom: 2px; }
 
 .sidebar-folder-title {
     display: flex;
@@ -957,9 +941,7 @@ body.stop-scrolling { overflow: hidden !important; }
     transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.sidebar-folder-items .sidebar-item {
-    padding-left: 44px;
-}
+.sidebar-folder-items .sidebar-item { padding-left: 44px; }
 
 /* ===========================
    MODAL — MOBILE MODE
@@ -1003,7 +985,6 @@ body.stop-scrolling { overflow: hidden !important; }
     transform: translateZ(0);
 }
 
-/* MO ALL — 3컬럼 */
 .detail-display-area.is-mobile-mode.is-all-mode {
     display: flex;
     width: 100%;
@@ -1032,14 +1013,8 @@ body.stop-scrolling { overflow: hidden !important; }
    OUTLINE 제거 (웨일/크로미움)
 =========================== */
 .tab-radio:focus,
-.tab-radio:focus-visible {
-    outline: none;
-}
+.tab-radio:focus-visible { outline: none; }
 
-.view-selector-group:focus-within {
-    outline: none;
-}
+.view-selector-group:focus-within { outline: none; }
 
-.modal-header {
-    outline: none;
-}
+.modal-header { outline: none; }
