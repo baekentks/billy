@@ -51,6 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (card.style.display !== 'none') count++;
         });
         filterCount.textContent = `${count} components`;
+        const sidebarCount = document.querySelector('.sidebar-count');
+        if (sidebarCount) sidebarCount.textContent = cards.length;
     }
 
     function showAllCards() {
@@ -124,6 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 subFilterGroup.querySelectorAll('.sub-filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 const g = btn.dataset.group;
+                sidebarFolders.forEach(fo => fo.classList.remove('has-child-active'));
+                sidebarItems.forEach(i => i.classList.remove('active'));
                 if (g === 'all') {
                     filterByCategory(category);
                     syncFolderActive(null, null);
@@ -146,6 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             const f = btn.dataset.filter;
+            sidebarFolders.forEach(fo => fo.classList.remove('has-child-active'));
+            sidebarItems.forEach(i => i.classList.remove('active'));
             if (f === 'all') {
                 showAllCards();
                 subFilterGroup.innerHTML = '';
@@ -202,6 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 slideDown(items);
             }
             const category = sec.dataset.category;
+            sidebarFolders.forEach(fo => fo.classList.remove('has-child-active'));
+            sidebarItems.forEach(i => i.classList.remove('active'));
             filterByCategory(category);
             filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === category));
             renderSubFilters(category);
@@ -221,6 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (folder.classList.contains('open')) {
                 slideDown(folderItems);
                 document.querySelector('.sidebar-item-all').classList.remove('active');
+                folder.classList.remove('has-child-active');
+                folder.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
                 filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === category));
                 filterByGroup(category, group);
                 renderSubFilters(category);
@@ -237,12 +247,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ── 사이드바 폴더 아이템 클릭 ────────────────────────
+    sidebarFolders.forEach(folder => {
+        folder.querySelectorAll('.sidebar-folder-items .sidebar-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const category = item.dataset.filter;
+                const group    = item.dataset.group;
+                const sub      = item.dataset.sub;
+
+                filterByCard(category, group, sub);
+
+                sidebarItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                sidebarFolders.forEach(fo => fo.classList.remove('has-child-active'));
+                folder.classList.add('has-child-active');
+
+                syncFolderActive(category, group);
+
+                filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === category));
+                renderSubFilters(category);
+                const groupBtn = subFilterGroup.querySelector(`[data-group="${group}"]`);
+                if (groupBtn) {
+                    subFilterGroup.querySelectorAll('.sub-filter-btn').forEach(b => b.classList.remove('active'));
+                    groupBtn.classList.add('active');
+                }
+
+                updateCount();
+            });
+        });
+    });
+
     // ── 최상위 전체 클릭 ──────────────────────────────────
     document.querySelector('.sidebar-item-all').addEventListener('click', () => {
         showAllCards();
         filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
         subFilterGroup.innerHTML = '';
-        sidebarFolders.forEach(f => f.querySelector('.sidebar-folder-title').classList.remove('active'));
+        sidebarFolders.forEach(f => {
+            f.classList.remove('has-child-active');
+            f.querySelector('.sidebar-folder-title').classList.remove('active');
+        });
+        sidebarItems.forEach(i => i.classList.remove('active'));
         syncSidebar('all', null, null);
         updateCount();
     });
